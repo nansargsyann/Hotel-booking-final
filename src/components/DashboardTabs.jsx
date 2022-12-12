@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import { useState } from 'react';
 
 const DashboardTabs = () => {
   const params = useLocation();
@@ -11,7 +10,7 @@ const DashboardTabs = () => {
       <ul className="nav nav-tabs">
         <li className="nav-item">
           <Link
-            className={`nav-link ${
+            className={`nav-link text-green ${
               params.pathname === '/dashboard/bookings' && 'active'
             }`}
             to="/dashboard/bookings"
@@ -21,7 +20,7 @@ const DashboardTabs = () => {
         </li>
         <li className="nav-item">
           <Link
-            className={`nav-link ${
+            className={`nav-link text-green ${
               params.pathname === '/dashboard/seller' && 'active'
             }`}
             to="/dashboard/seller"

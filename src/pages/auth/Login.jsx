@@ -5,26 +5,22 @@ import { useNavigate } from 'react-router';
 // Bootstrap
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+//import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const loginHandler = async (e) => {
-    setLoading(true);
-    e.preventDefault();
+  const loginHandler = async (values) => {
 
     try {
-      const response = await login({ email, password });
+      const response = await login({ email: values.email, password: values.password });
       setTimeout(() => {
         navigate('/dashboard/bookings');
       }, 1000);
@@ -37,8 +33,8 @@ const Login = () => {
       }
     } catch (err) {
       toast.error(err.response.data);
-      setLoading(false);
     }
+    //actions.resetForm();
   };
 
   return (
@@ -49,38 +45,30 @@ const Login = () => {
           <p className="text-muted">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           </p>
-          <Form onSubmit={loginHandler}>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="submit" disabled={loading}>
-              {loading && (
-                <Spinner animation="border" className="spinner-custom" />
-              )}
-              Sign in
-            </Button>
-            <p className="mt-4">
-              <small className="text-muted">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptas, ducimus?
-              </small>
-            </p>
-          </Form>
+        <Formik 
+            initialValues={{ email: "", password: "" }} 
+            validationSchema={Yup.object({  
+                email: Yup.string().email("Invalid email address").required("Required!"),
+                password: Yup.string().min(8, "Must be at least 8 characters").required("Required!"), 
+            })} 
+            onSubmit={loginHandler}
+        > 
+            <Form>
+              <div className='mb-3'>
+                <span>Email</span> 
+                <Field name="email" type="email" className='form-control inputField' /> 
+                <ErrorMessage name="email" component="div" className='text-danger'/> 
+              </div>
+                
+              <div className='mb-3'>
+                <span>Password</span> 
+                <Field name="password" type="password" className='form-control inputField' /> 
+                <ErrorMessage name="password" component="div" className='text-danger' /> 
+              </div>
+                
+                <Button type="submit" className='pointer'>Submit</Button> 
+            </Form> 
+        </Formik> 
         </Col>
       </Row>
     </Container>

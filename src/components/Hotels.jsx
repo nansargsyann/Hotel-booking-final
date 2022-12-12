@@ -27,7 +27,7 @@ const Hotels = () => {
     <>
       {hotels && hotels.length ? (
         hotels.map((hotel) => (
-          <Col key={hotel._id} md={3}>
+          <Col key={hotel._id} md={4}>
             <Link
               to={`/hotels/${hotel._id}`}
               className="text-decoration-none text-dark"
@@ -37,7 +37,7 @@ const Hotels = () => {
           </Col>
         ))
       ) : (
-        <span>No hotels found!</span>
+        <span className='text-green'>Nothing to book right now. Check back soon.</span>
       )}
     </>
   );

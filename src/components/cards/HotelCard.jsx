@@ -1,8 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import { BiBed } from 'react-icons/bi';
-import { BiCalendarAlt } from 'react-icons/bi';
 import { GoLocation } from 'react-icons/go';
-import { diffDays } from '../../actions/hotels';
+// import { diffDays } from '../../actions/hotels';
 import moment from 'moment/moment';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router';
@@ -21,38 +19,37 @@ const HotelCard = ({ hotel, isOwner = false, setSmShow, setId }) => {
   };
 
   return (
-    <Card className="mb-4">
+    <Card className="mb-4 primary-bg hotel-card">
       <Card.Img
         variant="top"
         src={`${import.meta.env.VITE_APP_API}/hotel/image/${hotel._id}`}
+        className='hotel-img'
       />
       <Card.Body>
-        <Card.Title>{hotel.title}</Card.Title>
-        <Card.Text className="mb-2">
+        <Card.Title className='text-hid fw-bold'>{hotel.title}</Card.Title>
+        <Card.Text className="mb-2 text-hid">
           <GoLocation />
           {hotel.location}
         </Card.Text>
-        <Card.Text className="mb-2">
+        {/* <Card.Text className="mb-2">
           <BiCalendarAlt />
           for {diffDays(hotel.from, hotel.to)}{' '}
           {diffDays(hotel.from, hotel.to) <= 1 ? ' day' : ' days'}
-        </Card.Text>
-        <Card.Text className="mb-2">
-          <BiBed /> {hotel.bed} bed
-        </Card.Text>
-        <Card.Text className="text-muted ">
+        </Card.Text> */}
+        <Card.Text className="text-muted mb-0">
           <small>
             Available from {new Date(hotel.from).toLocaleDateString()}
           </small>
         </Card.Text>
-        <Card.Text className="text-muted ">
+        <Card.Text className="text-muted mb-0">
           <small>
             <i>Posted {moment(hotel.createdAt).fromNow()}</i>
           </small>
         </Card.Text>
+        <Card.Text className='fw-bold'>${hotel.price} night</Card.Text>
         {isOwner && (
           <div className="d-grid gap-2">
-            <Button variant="warning" onClick={navigateToEdit}>
+            <Button className='pointer' onClick={navigateToEdit}>
               Edit
             </Button>
             <Button variant="danger" onClick={openDeleteModal}>

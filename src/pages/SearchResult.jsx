@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useSearchParams, Link } from 'react-router-dom';
 
+
 import { useEffect } from 'react';
 import { searchListings } from '../actions/hotels';
 import { useState } from 'react';
@@ -42,7 +43,7 @@ const SearchResult = () => {
       <Row>
         {hotels && hotels.length ? (
           hotels.map((hotel) => (
-            <Col key={hotel._id} md={3}>
+            <Col key={hotel._id} md={4}>
               <Link
                 to={`/hotels/${hotel._id}`}
                 className="text-decoration-none text-dark"

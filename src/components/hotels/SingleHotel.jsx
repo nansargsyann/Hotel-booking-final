@@ -17,7 +17,7 @@ const SingleHotel = () => {
   const { auth } = useSelector((state) => ({ ...state }));
 
   const [hotel, setHotel] = useState({});
-  const [alreadyBooked, setAlreadyBooked] = useState(false);
+  const [alreadyBooked, setAlreadyBooked] = useState(true);
   const [loading, setLoading] = useState(false);
 
 
@@ -67,7 +67,7 @@ const SingleHotel = () => {
     if (auth && auth.token) {
       isAlreadyBooked(auth.token, params.id).then((res) => {
         // if (res.data.ok) 
-        setAlreadyBooked(true);
+        setAlreadyBooked(false);
       });
     }
   }, []);
@@ -84,11 +84,11 @@ const SingleHotel = () => {
               <img
                 src={`${import.meta.env.VITE_APP_API}/hotel/image/${params.id}`}
                 alt={hotel.title}
-                className="w-100 position-sticky top-30"
+                className="w-100 position-sticky top-30 mb-4"
               />
             </Col>
             <Col md={6}>
-              <h2>{hotel.title}</h2>
+              <h2 className='text-green fw-bold'>{hotel.title}</h2>
               <p>{hotel.content}</p>
               <p>
                 <GoLocation />
@@ -104,8 +104,9 @@ const SingleHotel = () => {
                 {hotel.bed}
               </p>
               <p>Available from {new Date(hotel.from).toLocaleDateString()}</p>
+              <p className='fw-bold'>${hotel.price} night</p>
               
-              <Button disabled={loading || alreadyBooked} variant="primary" className="mb-3" onClick={handleBooking}>
+              <Button disabled={loading || alreadyBooked} variant="primary" className="mb-3 pointer" onClick={handleBooking}>
                 {
                   loading
                   ? "Loading..."

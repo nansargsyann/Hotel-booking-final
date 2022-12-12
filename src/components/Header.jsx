@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import greenLogo from '/images/greenLogo.png';
 
-// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -24,15 +24,14 @@ const Header = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className='primary-bg' expand="lg">
       <Container>
-        <Link to="/" className="navbar-brand"> Booking
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Link to="/" className="navbar-brand"> <img src={greenLogo} className='w-15'/> </Link>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className='border-green' />
         <Navbar.Collapse>
-          <Nav className="me-auto d-flex justify-content-between w-100">
+          <Nav className="d-flex justify-content-around w-75">
             <>
-            <Link to="/" className="nav-link">
+            <Link to="/" className="nav-link text-green">
               Home
             </Link>
             </>
@@ -45,10 +44,10 @@ const Header = () => {
               </NavDropdown>
             ) : (
               <>
-                <Link to="/login" className="nav-link">
+                <Link to="/login" className="nav-link text-green">
                   Login
                 </Link>
-                <Link to="/register" className="nav-link">
+                <Link to="/register" className="nav-link text-green">
                   Register
                 </Link>
               </>

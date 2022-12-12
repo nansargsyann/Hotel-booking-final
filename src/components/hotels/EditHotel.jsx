@@ -8,12 +8,14 @@ import { getHotelById, updateHotel } from '../../actions/hotels';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
 
 const { RangePicker } = DatePicker;
 
 const EditHotel = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [locationValue, setLocationValue] = useState('');
   const { auth } = useSelector((state) => ({ ...state }));
@@ -61,6 +63,7 @@ const EditHotel = () => {
 
       const res = await updateHotel(token, formData, location.state.id);
       toast.success('Hotel is updated!');
+      navigate('/dashboard');
     } catch (err) {
       console.log(err);
     }
@@ -72,14 +75,14 @@ const EditHotel = () => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
-        <h2>Edit Hotel</h2>
+      <div className="container-fluid green-bg p-5 text-center">
+        <h2 className='text-prim'>Edit Hotel</h2>
       </div>
       {values && (
         <Container className="mt-4 mb-4">
           <Row>
             <Col md={{ span: 4, offset: 2 }}>
-              <label className="w-100 pointer">
+              <label className="w-100">
                 <img
                   src={preview}
                   alt="preview_image"
@@ -103,6 +106,7 @@ const EditHotel = () => {
                     type="text"
                     value={values.title}
                     onChange={handleChange}
+                    className='inputField'
                   />
                 </Form.Group>
 
@@ -113,6 +117,7 @@ const EditHotel = () => {
                     as="textarea"
                     value={values.content}
                     onChange={handleChange}
+                    className='inputField'
                   />
                 </Form.Group>
 
@@ -120,19 +125,13 @@ const EditHotel = () => {
                   <Form.Label>Location</Form.Label>
                   <ReactGoogleAutocomplete
                     placeholder=""
-                    className="form-control"
+                    className="form-control inputField"
                     apiKey={import.meta.env.VITE_APP_GOOGLE_AUTOCOMPLETE}
                     onPlaceSelected={(place) => {
                       setLocationValue(place.formatted_address);
                     }}
                     defaultValue={locationValue}
                   />
-                  {/* <Form.Control
-                  name="location"
-                  type="text"
-                  value={values.location}
-                  onChange={handleChange}
-                /> */}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -142,6 +141,7 @@ const EditHotel = () => {
                     type="number"
                     value={values.price}
                     onChange={handleChange}
+                    className='inputField'
                   />
                 </Form.Group>
 
@@ -149,19 +149,19 @@ const EditHotel = () => {
                   <Form.Label>Number of beds</Form.Label>
                   <Form.Select
                     name="bed"
-                    className="mb-3"
+                    className="mb-3 inputField"
                     value={values.bed}
                     onChange={handleChange}
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <option value="3">4</option>
+                    <option value="4">4</option>
                   </Form.Select>
                 </Form.Group>
 
                 <RangePicker
-                  className="mb-3 w-100"
+                  className="mb-3 w-100 inputField"
                   onChange={(date, dateString) => {
                     setValues({
                       ...values,
@@ -177,7 +177,7 @@ const EditHotel = () => {
                 />
 
                 <div>
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" type="submit" className='pointer'>
                     Save
                   </Button>
                 </div>

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { createHotel } from '../../actions/hotels';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import upload from '/images/uploadImg.png';
 
 import { DatePicker } from 'antd';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
@@ -20,14 +21,13 @@ const initialState = {
   bed: '',
 };
 
-const initialImage = 'https://via.placeholder.com/200x200.png?text=HotelImage';
 
 const AddHotel = () => {
   const { auth } = useSelector((state) => ({ ...state }));
   const { token } = auth;
   const [values, setValues] = useState(initialState);
   const [location, setLocation] = useState('');
-  const [preview, setPreview] = useState(initialImage);
+  const [preview, setPreview] = useState(upload);
 
   const handleImageChange = (e) => {
     setPreview(URL.createObjectURL(e.target.files[0]));
@@ -63,15 +63,14 @@ const AddHotel = () => {
   };
   return (
     <>
-      <pre>{JSON.stringify(values)}</pre>
-      <div className="container-fluid bg-secondary p-5 text-center">
-        <h2>Add Hotel</h2>
+      <div className="container-fluid green-bg p-5 text-center">
+        <h2 className='text-prim'>Add Hotel</h2>
       </div>
 
       <Container className="mt-4 mb-4">
         <Row>
           <Col md={{ span: 4, offset: 2 }}>
-            <label className="w-100 pointer">
+            <label className="w-100">
               <img
                 src={preview}
                 alt="preview_image"
@@ -95,6 +94,7 @@ const AddHotel = () => {
                   type="text"
                   value={values.title}
                   onChange={handleChange}
+                  className='inputField'
                 />
               </Form.Group>
 
@@ -105,6 +105,7 @@ const AddHotel = () => {
                   as="textarea"
                   value={values.content}
                   onChange={handleChange}
+                  className='inputField'
                 />
               </Form.Group>
 
@@ -119,7 +120,7 @@ const AddHotel = () => {
 
                 <ReactGoogleAutocomplete
                   placeholder=""
-                  className="form-control"
+                  className="form-control inputField"
                   apiKey={import.meta.env.VITE_APP_GOOGLE_AUTOCOMPLETE}
                   onPlaceSelected={(place) => {
                     setLocation(place.formatted_address);
@@ -134,6 +135,7 @@ const AddHotel = () => {
                   type="number"
                   value={values.price}
                   onChange={handleChange}
+                  className='inputField'
                 />
               </Form.Group>
 
@@ -141,8 +143,8 @@ const AddHotel = () => {
                 <Form.Label>Number of beds</Form.Label>
                 <Form.Select
                   name="bed"
-                  className="mb-3"
-                  value={values.bed}
+                  className="mb-3 inputField"
+                  
                   onChange={handleChange}
                 >
                   <option value="1">1</option>
@@ -153,7 +155,7 @@ const AddHotel = () => {
               </Form.Group>
 
               <RangePicker
-                className="mb-3 w-100"
+                className="mb-3 w-100 inputField"
                 onChange={(date, dateString) => {
                   setValues({
                     ...values,
@@ -164,7 +166,7 @@ const AddHotel = () => {
                 format="YYYY-MM-DD"
               />
               <div>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className='pointer'>
                   Save
                 </Button>
               </div>

@@ -1,5 +1,19 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
-
+@font-face {
+  font-family: quickSandLight;
+  src: url('../public//fonts/Quicksand_Light.otf');
+}
+@font-face {
+  font-family: quickSand;
+  src: url('../public//fonts/Quicksand_Book.otf');
+}
+*{
+  font-family: 'quickSand', 'Courier New', monospace;
+  color: #236a5c;
+}
+.w-15{
+  width: 15%;
+}
 .vh-85 {
   height: 85vh;
 }
@@ -11,14 +25,67 @@
 .vh-50 {
   height: 50vh;
 }
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.fit-height{
+  height: fit-content !important;
+}
+
+.primary-bg{
+  background-color: #fffefb;
+}
+.green-bg{
+  background-color: #236a5c;
+}
+
+.border-green {
+  border: 1px solid #236a5c;
+}
+.text-green, .nav-link:hover{
+  color: #236a5c;
+}
+.text-prim{
+  color: #fffefb;
+}
+
+.inputField, .inputField:focus, .inputField:hover{
+  border-color: #236a5c;
+  outline-color: #236a5c;
+  box-shadow: none;
+}
+
+.hotel-card{
+  border: none;
+}
+.hotel-img{
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  
+}
+.text-hid {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .footer {
+  margin-top: 30px;
   padding: 30px;
-  background-color: rgb(248, 249, 250);
+  background-color: #236a5c;
 }
 
 .pointer {
   cursor: pointer;
+  background-color: #236a5c;
+  border: #236a5c;
+  color: #fffefb;
+}
+.pointer:hover{
+  background-color: #236a5c;
+  color: #fffefb;
 }
 
 .spinner-custom {
@@ -29,29 +96,22 @@
 
 
 /* Home Banner */
-
-.home-banner {
-  position: relative;
-  background-color: black;
-  margin-bottom: 30px;
-  /* background-image: linear-gradient(90deg, black, white, black); */
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-  height: 400px;
+.home-banner{
   overflow: hidden;
-
+  margin-bottom: 30px;
 }
-.home-banner img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.home-banner .text-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.center-white-gradient {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-image: linear-gradient(45deg, green, transparent, black);
+.home-banner p{
+  font-weight: 600;
+  font-size: 4rem;
+  text-transform: uppercase;
+}
+.home-banner span{
+  /* font-family: 'quickSand', 'Courier New', monospace; */
+  font-weight: 600;
+  font-size: 1.5rem;
 }

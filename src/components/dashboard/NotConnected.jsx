@@ -4,6 +4,8 @@ import { BiHomeAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createConnectAccount } from '../../actions/stripe';
+import Button from 'react-bootstrap/Button';
+
 
 const NotConnected = () => {
   // Will be deleted
@@ -26,20 +28,20 @@ const NotConnected = () => {
     <Container fluid>
       <Row>
         <Col md={{ span: 6, offset: 3 }} className="text-center">
-          <div className="p-5 pointer">
+          <div className="p-5">
             <BiHomeAlt className="h1" />
             <h4>Setup payouts to post hotel rooms</h4>
             <p className="lead">
               <strong>HotelBooking.am</strong> partners with stripe to transfer
               earnings to your bank accout
             </p>
-            <button
-              className="btn btn-primary mb-3"
+            <Button
+              className="btn pointer mb-3"
               onClick={submitHandler}
               disabled={loading}
             >
               {loading ? 'Processing...' : 'Setup Payouts'}
-            </button>
+            </Button>
             <p className="text-muted">
               <small>
                 You'll be redirected to Stripe to complete the onboarding

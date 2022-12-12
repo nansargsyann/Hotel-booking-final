@@ -30,7 +30,7 @@ const Connected = () => {
   const deleteHandler = async () => {
     try {
       const res = await deleteHotel(token, id);
-      toast.success('Hotel delted successfully! 🔥');
+      toast.success('Hotel deleted successfully! 🔥');
       setSmShow(false);
       getSellerHotels();
     } catch (err) {
@@ -49,8 +49,8 @@ const Connected = () => {
           md={12}
           className="mb-4 d-flex justify-content-between align-items-center"
         >
-          <h3 className="mb-0">Your hotels</h3>
-          <Link to="/hotels/new" className="btn btn-primary">
+          <h3 className="mb-0 text-green">Your hotels</h3>
+          <Link to="/hotels/new" className="btn pointer">
             + Add Hotel
           </Link>
         </Col>
@@ -60,7 +60,7 @@ const Connected = () => {
           {hotels && hotels.length ? (
             hotels.map((hotel) => {
               return (
-                <Col key={hotel._id} md={3}>
+                <Col key={hotel._id} md={4}>
                   <Link
                     to={`/hotels/${hotel._id}`}
                     className="text-decoration-none text-dark"
@@ -70,6 +70,7 @@ const Connected = () => {
                       isOwner={true}
                       setSmShow={setSmShow}
                       setId={setId}
+                      // className='fit-height bg-dark'
                     />
                   </Link>
                 </Col>

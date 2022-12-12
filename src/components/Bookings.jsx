@@ -27,7 +27,7 @@ const Bookings = () => {
   }, [])
 
   return <>
-      <Container>
+      <Container className='mt-5'>
         <Row>
           {hotels && hotels.length ? (
             hotels.map((hotel) => {
